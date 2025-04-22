@@ -6,6 +6,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="{% static 'app/euch.png' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'app/styles.css' %}">
     <title>Django Blog</title>
 </head>
@@ -15,7 +16,7 @@
         <a class="active" href="{% url 'home' %}">Home</a>
         {% if user.is_authenticated %}
         <a href="{% url 'post-create' %}">New post</a>
-        <a href="#">My posts</a>
+        <a href="{% url 'my-post' %}">My posts</a>
         <a href="{% url 'signout' %}">Sign out</a>
         <!-- <a href="{% url 'profile' %}">Profile</a> -->
         <p>Welcome, {{ user.username }}!</p>
@@ -30,8 +31,7 @@
         <form method="get" id="topics-form">
             {% for topic in topics %}
             <label class="topic-label">
-                <input {% if topic in selected_topics %} checked {% endif %} type="checkbox" name="topics"
-                    value="{{ topic }}" onchange="document.getElementById('topics-form').submit();">
+                <input checked type="checkbox" name="topics" value="{{ topic }}" onchange="toggle('{{ topic }}')">
                 {{ topic }}
             </label>
             {% endfor %}
@@ -59,6 +59,19 @@
             const checkboxes = document.querySelectorAll('#topics-form input[type="checkbox"]');
             checkboxes.forEach(cb => cb.checked = false);
             document.getElementById('topics-form').submit();  // auto-submit after unselect all
+        }
+
+        function toggle(topic) {
+            console.log(topic);
+            const topicElements = document.querySelectorAll('.' + topic);
+            const checkbox = document.querySelector(`input[value="${topic}"]`);
+            topicElements.forEach(function (element) {
+                if (checkbox.checked) {
+                    element.style.display = "block";  // Show the element
+                } else {
+                    element.style.display = "none";   // Hide the element
+                }
+            });
         }
     </script>
 </body>

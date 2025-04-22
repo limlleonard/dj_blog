@@ -14,23 +14,29 @@ from .models import Post
 TOPICS = ["Politics", "Technology", "Daily", "Default"]
 
 
-def home(request):
-    if "topics" not in request.GET:
-        selected_topics = TOPICS
-    else:
-        selected_topics = request.GET.getlist("topics")
-    posts = Post.objects.filter(topic__in=selected_topics).order_by("-date_posted")
+def post_list_view(request, filter_by_author=False):
+    posts = Post.objects.all()
+    if filter_by_author and request.user.is_authenticated:
+        posts = posts.filter(author=request.user)
 
+    posts = posts.order_by("-date_posted")
     paginator = Paginator(posts, 5)  # 5 posts per page
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     context = {
         "topics": TOPICS,
         "page_obj": page_obj,
-        "selected_topics": selected_topics,
+        "filter_by_author": filter_by_author,
     }
-
     return render(request, "app/home.html", context)
+
+
+def home(request):
+    return post_list_view(request)
+
+
+def my_post(request):
+    return post_list_view(request, filter_by_author=True)
 
 
 def register(request):

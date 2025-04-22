@@ -16,19 +16,19 @@
     font-size: 1.1em;
 }
 
-.Politics {
+.Politics>p.post-topic {
     background-color: aqua;
 }
 
-.Default {
+.Default>p.post-topic {
     background-color: lightyellow;
 }
 
-.Daily {
+.Daily>p.post-topic {
     background-color: lightcoral;
 }
 
-.Technology {
+.Technology>p.post-topic {
     background-color: lightgreen;
 }
 

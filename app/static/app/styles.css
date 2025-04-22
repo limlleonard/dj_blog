@@ -35,13 +35,14 @@ button {
 h2 {
     /* border: 1px solid red; */
     margin-bottom: 30px;
+    color: darkblue
 }
 
 .ctn-r {
     grid-area: right;
     overflow-y: auto;
     min-height: 0;
-    background-color: #aaa;
+    background-color: #bbb;
     padding: 30px 40px;
 }
 
