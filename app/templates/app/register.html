@@ -1,0 +1,9 @@
+{% extends "app/template.html" %}
+{% block content %}
+<h2>Register</h2>
+<form class="register-form" action="" method="POST">
+    {% csrf_token %}
+    {{form}}
+    <button type="submit">Register</button>
+</form>
+{% endblock content %}

@@ -1,0 +1,14 @@
+start project app
+routing (views -> urls -> urls)
+templates (connect css)
+pass in topics to templates
+model posts pending on user
+navigation between pages
+register page: forms -> views -> 
+signup, signout
+post form
+add real post to home
+pagination ? < sign
+
+document
+UserCreationForm, login, field in form

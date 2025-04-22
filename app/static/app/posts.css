@@ -1,0 +1,37 @@
+.ctn-post {
+    margin-bottom: 20px;
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.post-title {
+    font-size: 1.5em;
+}
+
+.post-topic,
+.author {
+    width: fit-content;
+    font-size: 1.1em;
+}
+
+.Politics {
+    background-color: aqua;
+}
+
+.Default {
+    background-color: lightyellow;
+}
+
+.Daily {
+    background-color: lightcoral;
+}
+
+.Technology {
+    background-color: lightgreen;
+}
+
+.content {
+    border-top: 1px dotted gray;
+}

@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="{% static 'app/styles.css' %}">
+    <title>Django Blog</title>
+</head>
+
+<body>
+    <nav class="topnav">
+        <a class="active" href="{% url 'home' %}">Home</a>
+        {% if user.is_authenticated %}
+        <a href="{% url 'post-create' %}">New post</a>
+        <a href="#">My posts</a>
+        <a href="{% url 'signout' %}">Sign out</a>
+        <!-- <a href="{% url 'profile' %}">Profile</a> -->
+        <p>Welcome, {{ user.username }}!</p>
+        {% else %}
+        <a href="{% url 'signup' %}">Sign up</a>
+        <a href="{% url 'register' %}">Register</a>
+        <p>Hello, guest!</p>
+        {% endif %}
+    </nav>
+    <div class="ctn-l">
+        <h3>Topics</h3>
+        <form method="get" id="topics-form">
+            {% for topic in topics %}
+            <label class="topic-label">
+                <input {% if topic in selected_topics %} checked {% endif %} type="checkbox" name="topics"
+                    value="{{ topic }}" onchange="document.getElementById('topics-form').submit();">
+                {{ topic }}
+            </label>
+            {% endfor %}
+            <input type="hidden" name="topics" value="" />
+            {% if topics %}
+            <div class="ctn-btn">
+                <button type="button" onclick="selectAll()">Select All</button>
+                <button type="button" onclick="unselectAll()">Unselect All</button>
+            </div>
+            <!-- <button type="submit">Filter</button> -->
+            {% endif %}
+        </form>
+    </div>
+    <div class="ctn-r">
+        {% block content %}{% endblock %}
+    </div>
+    <script>
+        function selectAll() {
+            const checkboxes = document.querySelectorAll('#topics-form input[type="checkbox"]');
+            checkboxes.forEach(cb => cb.checked = true);
+            document.getElementById('topics-form').submit();  // auto-submit after select all
+        }
+
+        function unselectAll() {
+            const checkboxes = document.querySelectorAll('#topics-form input[type="checkbox"]');
+            checkboxes.forEach(cb => cb.checked = false);
+            document.getElementById('topics-form').submit();  // auto-submit after unselect all
+        }
+    </script>
+</body>
+
+</html>

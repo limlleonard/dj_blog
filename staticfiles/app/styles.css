@@ -1,0 +1,53 @@
+/* border: 1px solid red; */
+@import url('nav.css');
+@import url('ctn-l.css');
+@import url('posts.css');
+@import url('post-form.css');
+@import url('register-form.css');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    display: grid;
+    grid-template-areas:
+        "topnav topnav"
+        "left right";
+    grid-template-rows: 50px 1fr;
+    grid-template-columns: 300px 1fr;
+    height: 100vh;
+}
+
+button {
+    font-size: 1em;
+    padding: 5px 10px;
+}
+
+.ctn-btn {
+    display: flex;
+    gap: 10px;
+}
+
+h2 {
+    /* border: 1px solid red; */
+    margin-bottom: 30px;
+}
+
+.ctn-r {
+    grid-area: right;
+    overflow-y: auto;
+    min-height: 0;
+    background-color: #aaa;
+    padding: 30px 40px;
+}
+
+.helptext {
+    display: none;
+}
+
+
+/* title in navbar, right sorted, height */
