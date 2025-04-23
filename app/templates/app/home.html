@@ -18,8 +18,10 @@
 <div class="ctn-post {{ post.topic }}">
     <h3 class="post-title">{{ post.title }}</h3>
     <p class="post-topic">{{ post.topic }}</p>
-    <p class="author">By {{ post.author }} on {{ post.date_posted|date:"Y.m.d, H:i" }}</p>
-    <p class="content">{{ post.content }}</p>
+    <p class="author">
+        By <strong>{{ post.author }}</strong> on <strong>{{ post.date_posted|date:"Y.m.d, H:i" }}</strong>
+    </p>
+    <p class="content">{{ post.content|linebreaksbr }}</p>
     {% if filter_by_author %}
     <div class="ctn-btn-post">
         <a href="{% url 'post-update' post.id %}">
