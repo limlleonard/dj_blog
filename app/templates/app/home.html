@@ -21,7 +21,7 @@
     <p class="author">By {{ post.author }} on {{ post.date_posted|date:"Y.m.d, H:i" }}</p>
     <p class="content">{{ post.content }}</p>
     {% if filter_by_author %}
-    <div class="ctn-btn">
+    <div class="ctn-btn-post">
         <a href="{% url 'post-update' post.id %}">
             <button type="button" class="action-button">Edit</button>
         </a>

@@ -15,16 +15,24 @@ TOPICS = ["Politics", "Technology", "Daily", "Default"]
 
 
 def post_list_view(request, filter_by_author=False):
-    posts = Post.objects.all()
+    selected_topics = request.GET.getlist("topics")
+    if not selected_topics:
+        # If not in request at all, means haven't checkbox yet, all selected
+        selected_topics = TOPICS
+        posts = Post.objects.all()
+    else:
+        posts = Post.objects.filter(topic__in=selected_topics)
+
     if filter_by_author and request.user.is_authenticated:
         posts = posts.filter(author=request.user)
 
     posts = posts.order_by("-date_posted")
-    paginator = Paginator(posts, 5)  # 5 posts per page
+    paginator = Paginator(posts, 5)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     context = {
         "topics": TOPICS,
+        "selected_topics": selected_topics,
         "page_obj": page_obj,
         "filter_by_author": filter_by_author,
     }
@@ -52,7 +60,7 @@ def register(request):
     return render(request, "app/register.html", {"form": form})
 
 
-def signup(request):
+def signin(request):
     if request.user.is_authenticated:
         return redirect("home")
 
@@ -74,7 +82,7 @@ def signup(request):
             messages.error(request, "Username OR password does not exit")
     else:
         form = UserCreationForm1()  # userloginform
-        return render(request, "app/signup.html", {"form": form})
+        return render(request, "app/signin.html", {"form": form})
 
 
 def signout(request):

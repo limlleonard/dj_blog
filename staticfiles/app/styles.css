@@ -25,11 +25,18 @@ body {
 button {
     font-size: 1em;
     padding: 5px 10px;
+    /* width: 100%; */
 }
 
 .ctn-btn {
+    display: grid;
+    gap: 5px;
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+}
+
+.ctn-btn-post {
     display: flex;
-    gap: 10px;
+    gap: 5px;
 }
 
 h2 {
