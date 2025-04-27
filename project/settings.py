@@ -6,11 +6,9 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 render_external_hostname = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
 if render_external_hostname:
@@ -61,18 +59,18 @@ WSGI_APPLICATION = "project.wsgi.application"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    # "default": {
-    #     "ENGINE": "django.db.backends.sqlite3",
-    #     "NAME": BASE_DIR / "db.sqlite3",
-    # },
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "bjv43dmw65b7obui857u",
-        "USER": "uwss14x03ljxhvrjdqvo",
-        "PASSWORD": os.environ.get("DB_PASSWORD"),
-        "HOST": "bjv43dmw65b7obui857u-postgresql.services.clever-cloud.com",
-        "PORT": "50013",
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     },
+    # "default": {
+    #     "ENGINE": "django.db.backends.postgresql",
+    #     "NAME": "bjv43dmw65b7obui857u",
+    #     "USER": "uwss14x03ljxhvrjdqvo",
+    #     "PASSWORD": os.environ.get("DB_PASSWORD"),
+    #     "HOST": "bjv43dmw65b7obui857u-postgresql.services.clever-cloud.com",
+    #     "PORT": "50013",
+    # },
 }
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -110,6 +108,8 @@ STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATICFILES_DIRS = [BASE_DIR / "app" / "static"]
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 

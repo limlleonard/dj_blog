@@ -10,5 +10,13 @@ post form
 add real post to home
 pagination ? < sign
 
+start user profile page
+set media root and urls in settings
+signal user -> profile
+media ??
+
+comment create a guest user
+add comment to templates
+
 document
 UserCreationForm, login, field in form

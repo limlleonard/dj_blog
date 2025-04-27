@@ -17,6 +17,7 @@
         {% if user.is_authenticated %}
         <a href="{% url 'post-create' %}">New post</a>
         <a href="{% url 'my-post' %}">My posts</a>
+        <a href="{% url 'profile' %}">My Profile</a>
         <a href="{% url 'signout' %}">Sign out</a>
         <!-- <a href="{% url 'profile' %}">Profile</a> -->
         <p>Welcome, {{ user.username }}!</p>
@@ -47,6 +48,15 @@
         </form>
     </div>
     <div class="ctn-r">
+        {% if messages %}
+        <div id="messages">
+            {% for message in messages %}
+            <p {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                {{ message }}
+            </p>
+            {% endfor %}
+        </div>
+        {% endif %}
         {% block content %}{% endblock %}
     </div>
     <script>
@@ -61,6 +71,14 @@
             checkboxes.forEach(cb => cb.checked = false);
             // document.getElementById('topics-form').submit();
         }
+        setTimeout(function () {
+            const messages = document.getElementById('messages');
+            if (messages) {
+                messages.style.transition = "opacity 0.5s ease";  // Smooth fade out
+                messages.style.opacity = 0;  // Make it invisible
+                setTimeout(() => messages.remove(), 500);  // Remove from DOM after fade
+            }
+        }, 5000);
         // onchange="toggle('{{ topic }}')"
         // function toggle(topic) {
         //     console.log(topic);

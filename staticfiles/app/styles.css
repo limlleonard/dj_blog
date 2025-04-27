@@ -57,5 +57,12 @@ h2 {
     display: none;
 }
 
+.success {
+    background-color: lightgreen;
+}
+
+.error {
+    background-color: lightcoral;
+}
 
 /* title in navbar, right sorted, height */
