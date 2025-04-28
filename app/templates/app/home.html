@@ -14,7 +14,7 @@
         By <strong>{{ post.author }}</strong> on <strong>{{ post.date_posted|date:"Y.m.d, H:i" }}</strong>
     </p>
     <p class="content">{{ post.content|linebreaksbr }}</p>
-    <form method="POST" action="{% url 'add-comment' post.id %}">
+    <form method="POST" action="{% url 'add-comment' pk=post.id %}">
         {% csrf_token %}
         <input type="text" name="comment" maxlength="300" class="comment-input" placeholder="Add a comment..." required>
         <!-- Hidden field to pass post ID if needed (optional, depending on URL setup) -->
@@ -28,10 +28,10 @@
 
     {% if filter_by_author %}
     <div class="ctn-btn-post">
-        <a href="{% url 'post-update' post.id %}">
+        <a href="{% url 'post-update' pk=post.id %}">
             <button type="button" class="action-button">Edit</button>
         </a>
-        <form action="{% url 'post-delete' post.id %}" method="POST">
+        <form action="{% url 'post-delete' pk=post.id %}" method="POST">
             {% csrf_token %}
             <button type="submit">Delete</button>
         </form>

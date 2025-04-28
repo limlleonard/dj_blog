@@ -154,19 +154,20 @@ def post_create_update(request, pk=None):
 def post_delete(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if post.author != request.user:
+        # this should not happen, since delete button is only shown in 'my post'
         messages.error(request, "You are not allowed to delete this post.")
-        return redirect(request.META.get("HTTP_REFERER", "home"))
+        return redirect(request.META.get("HTTP_REFERER", "my-post"))
 
     if request.method == "POST":
         post.delete()
         messages.success(request, "Post deleted successfully.")
-        return redirect("home")  # redirect after deletion
+        return redirect("my-post")
     return render(request, "post_confirm_delete.html", {"post": post})
 
 
-def add_comment(request, post_id):
+def add_comment(request, pk):
     if request.method == "POST":
-        post = get_object_or_404(Post, id=post_id)
+        post = get_object_or_404(Post, pk=pk)
         content = request.POST.get("comment")
         if content:
             if request.user.is_authenticated:
